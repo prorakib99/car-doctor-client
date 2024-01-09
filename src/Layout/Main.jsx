@@ -1,9 +1,14 @@
+import { Outlet } from "react-router-dom";
+import Header from "../pages/Shared/Header/Header";
 
 const Main = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <div className="container mx-auto px-8">
+                <Header></Header>
+                <Outlet></Outlet>
+            </div>
+        </>
     );
 };
 
