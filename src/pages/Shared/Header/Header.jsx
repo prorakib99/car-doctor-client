@@ -8,7 +8,7 @@ const Header = () => {
         <li> <Link to="/about" className="text-neutral-700 text-lg font-semibold font-['Inter']">About</Link> </li>
     </>
     return (
-        <div className="navbar bg-base-100 flex items-center my-5">
+        <div className="navbar relative z-20 bg-base-100 flex items-center my-5">
             <div className="navbar-start">
                 <div className="dropdown flex-1 lg:flex-none">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
