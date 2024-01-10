@@ -6,6 +6,7 @@ const Header = () => {
     const navItems = <>
         <li><Link to="/" className="text-neutral-700 text-lg font-semibold font-['Inter']">Home</Link> </li>
         <li> <Link to="/about" className="text-neutral-700 text-lg font-semibold font-['Inter']">About</Link> </li>
+        <li> <Link to="/user/login" className="text-neutral-700 text-lg font-semibold font-['Inter']">Login</Link> </li>
     </>
     return (
         <div className="navbar relative z-20 bg-base-100 flex items-center my-5">
