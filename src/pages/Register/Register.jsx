@@ -4,13 +4,24 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 
 const Register = () => {
+
+    const handleRegister = event => {
+        event.preventDefault();
+
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(name, email, password);
+    }
     return (
         <div className="grid gap-10 lg:grid-cols-2 items-center py-10">
             <div className='hidden lg:block'>
                 <img className='block' src={loginImg} alt="" />
             </div>
             <div className="rounded-[10px] py-[50px] px-[30px] sm:px-[80px] border border-stone-300">
-                <form >
+                <form onSubmit={handleRegister}>
                     <h2 className="text-center text-neutral-700 text-[40px] font-semibold font-['Inter']">Sign Up</h2>
                     <div className="flex flex-col gap-7 mt-6">
                         <div className='flex flex-col gap-2'>
