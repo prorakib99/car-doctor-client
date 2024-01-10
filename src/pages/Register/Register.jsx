@@ -1,9 +1,13 @@
+import { useContext } from 'react';
 import loginImg from '../../assets/images/login/login.svg';
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Register = () => {
+
+    const { createUser } = useContext(AuthContext)
 
     const handleRegister = event => {
         event.preventDefault();
@@ -13,7 +17,15 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(name, email, password);
+        createUser(email, password)
+        .then(res => {
+            const createdUser = res.user;
+            console.log(createdUser);
+        })
+        .catch(error => {
+            const message = error.message;
+            console.log(error);
+        })
     }
     return (
         <div className="grid gap-10 lg:grid-cols-2 items-center py-10">
@@ -26,15 +38,15 @@ const Register = () => {
                     <div className="flex flex-col gap-7 mt-6">
                         <div className='flex flex-col gap-2'>
                             <label className="text-neutral-700 text-lg font-semibold font-['Inter']" htmlFor="name">Name</label>
-                            <input className="bg-white px-3 py-2 text-lg text-gray-800 outline-none rounded border border-gray-200" type="text" name="name" id="name" placeholder='Your name' />
+                            <input className="bg-white px-3 py-2 text-lg text-gray-800 outline-none rounded border border-gray-200" type="text" name="name" id="name" placeholder='Your name' required />
                         </div>
                         <div className='flex flex-col gap-2'>
                             <label className="text-neutral-700 text-lg font-semibold font-['Inter']" htmlFor="email">Email</label>
-                            <input className="bg-white px-3 py-2 text-lg text-gray-800 outline-none rounded border border-gray-200" type="email" name="email" id="email" placeholder='Your email' />
+                            <input className="bg-white px-3 py-2 text-lg text-gray-800 outline-none rounded border border-gray-200" type="email" name="email" id="email" placeholder='Your email' required />
                         </div>
                         <div className='flex flex-col gap-2'>
                             <label className="text-neutral-700 text-lg font-semibold font-['Inter']" htmlFor="password">Password</label>
-                            <input className="bg-white px-3 py-2 text-lg text-gray-800 outline-none rounded border border-gray-200" type="password" name="password" id="password" placeholder='Your password' />
+                            <input className="bg-white px-3 py-2 text-lg text-gray-800 outline-none rounded border border-gray-200" type="password" name="password" id="password" placeholder='Your password' required />
                         </div>
                         <button type="submit" className="text-center py-3 mt-2 bg-[#FF3811] btn rounded-[10px] text-white text-xl font-medium font-['Inter'] leading-none border-none">Sign Up</button>
                     </div>
