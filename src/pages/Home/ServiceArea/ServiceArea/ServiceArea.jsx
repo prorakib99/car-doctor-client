@@ -1,6 +1,15 @@
+import { useEffect, useState } from "react";
 import ServiceCard from "../ServiceCard/ServiceCard";
 
 const ServiceArea = () => {
+    const [services, setServices] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/services')
+        .then(res => res.json())
+        .then(data => setServices(data))
+    }, [])
+
     return (
         <div className='py-8 sm:pb-16'>
             <div className="text-center">
@@ -9,12 +18,9 @@ const ServiceArea = () => {
                 <p className="text-center text-neutral-500 text-base font-normal font-['Inter'] capitalize md:leading-[30px]">the majority have suffered alteration in some form, by injected humour, or randomized <br className='hidden md:block' /> words which do not look even slightly believable. </p>
             </div>
             <div className="grid md:grid-cols-2 py-10 lg:grid-cols-3 gap-6">
-                <ServiceCard></ServiceCard>
-                <ServiceCard></ServiceCard>
-                <ServiceCard></ServiceCard>
-                <ServiceCard></ServiceCard>
-                <ServiceCard></ServiceCard>
-                <ServiceCard></ServiceCard>
+                {
+                    services.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
+                }
             </div>
             <div className='flex justify-center'>
                 <button className="btn btn-outline text-center text-orange-600 text-lg font-semibold hover:bg-orange-600 duration-500 hover:text-white font-['Inter']">More Services</button>
