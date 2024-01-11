@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import victor from '../../assets/images/others/Vector.png'
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BookingService = () => {
     const { user } = useContext(AuthContext)
@@ -26,7 +28,27 @@ const BookingService = () => {
             serviceId: _id,
             message
         }
-        console.log(newBooking);
+
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBooking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success("Successfully Order Placed!")
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error(error.message)
+            })
+            
+
     }
     return (
         <>
@@ -44,7 +66,7 @@ const BookingService = () => {
                         <div className='grid lg:grid-cols-2 gap-6'>
                             <input type='text' required placeholder='Your Name' name='name' defaultValue={user?.displayName} className="w-full px-5 h-[60px] placeholder:text-neutral-400 text-neutral-900 text-lg font-normal font-['Inter'] leading-[30px] bg-white rounded-[10px]" />
 
-                            <input type='date' name='date' className="w-full px-5 h-[60px] text-neutral-400 focus:text-neutral-900 text-lg font-normal font-['Inter'] leading-[30px] bg-white rounded-[10px]" />
+                            <input type='date' name='date' required className="w-full px-5 h-[60px] text-neutral-400 focus:text-neutral-900 text-lg font-normal font-['Inter'] leading-[30px] bg-white rounded-[10px]" />
 
                             <input type='email' required placeholder='Your Email' name='email' defaultValue={user?.email} className="w-full px-5 h-[60px] placeholder:text-neutral-400 text-neutral-900 text-lg font-normal font-['Inter'] leading-[30px] bg-white rounded-[10px]" />
 
