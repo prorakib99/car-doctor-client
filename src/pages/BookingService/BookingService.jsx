@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import victor from '../../assets/images/others/Vector.png'
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PageNavigator from '../Shared/PageNavigator/PageNavigator';
 
 const BookingService = () => {
     const { user } = useContext(AuthContext)
@@ -24,8 +24,10 @@ const BookingService = () => {
             customerName: name,
             email,
             date,
+            img,
             price,
-            serviceId: _id,
+            service: title,
+            service_id: _id,
             message
         }
 
@@ -53,14 +55,7 @@ const BookingService = () => {
     return (
         <>
             <div className='mb-20'>
-                <div className='relative'>
-                    <div style={{ backgroundImage: `url('${img}')` }} className="bg-no-repeat py-16 md:py-32 bg-bottom bg-cover my-10 before:w-full before:h-full before:bg-opacity-55 before:top-0 before:z-10 before:left-0 before:absolute before:bg-neutral-900 before:rounded-lg rounded-lg">
-                        <div className="text-white text-center px-6 text-3xl lg:text-[45px] font-bold relative z-30 font-['Inter']">Booking: {title}</div>
-                        <div style={{ backgroundImage: `url('${victor}')` }} className='bg-no-repeat absolute bottom-0 w-full px-5 right-1/2 left-1/2 -translate-x-1/2 z-30 bg-center'>
-                            <p className="text-white text-xl text-center font-medium font-['Inter']">Home / Booking</p>
-                        </div>
-                    </div>
-                </div>
+                <PageNavigator service={service} page='Booking'></PageNavigator>
                 <div className='bg-zinc-100 rounded-[10px] mt-16 p-10 lg:p-20'>
                     <form onSubmit={handleBookingService} className='grid gap-6'>
                         <div className='grid lg:grid-cols-2 gap-6'>

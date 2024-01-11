@@ -1,12 +1,27 @@
 import { Link } from "react-router-dom";
 import logo from '../../../assets/logo.svg'
+import { useContext } from "react";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
+
     const navItems = <>
         <li><Link to="/" className="text-neutral-700 text-lg font-semibold font-['Inter']">Home</Link> </li>
         <li> <Link to="/about" className="text-neutral-700 text-lg font-semibold font-['Inter']">About</Link> </li>
-        <li> <Link to="/user/login" className="text-neutral-700 text-lg font-semibold font-['Inter']">Login</Link> </li>
+        {
+            user ? <>
+                <li> <Link to="/bookings" className="text-neutral-700 text-lg font-semibold font-['Inter']">Orders</Link> </li>
+                <li> <button onClick={handleLogout} className="text-neutral-700 text-lg font-semibold font-['Inter']">Logout</button> </li>
+            </> : <li> <Link to="/user/login" className="text-neutral-700 text-lg font-semibold font-['Inter']">Login</Link> </li>
+        }
     </>
     return (
         <div className="navbar relative z-20 bg-base-100 flex items-center my-5">
@@ -29,7 +44,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <button className="btn btn-outline hover:bg-primary text-primary lg:px-5 lg:text-lg font-semibold font-['Inter']">Appointment</button>
+                <button className="btn btn-outline hover:bg-primary text-primary lg:px-5 lg:text-lg font-semibold font-['Inter']">Appointment</button>
             </div>
         </div>
     );
