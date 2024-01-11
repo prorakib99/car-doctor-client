@@ -1,10 +1,9 @@
-import { useState } from "react";
+
 import { FaX } from "react-icons/fa6";
 
-const BookingCard = ({ booking, handleDelete }) => {
-    const [buttonState, setButtonState] = useState(false);
+const BookingCard = ({ booking, handleBookingConfirm, handleDelete }) => {
 
-    const { _id, img, service, price, date } = booking;
+    const { _id, img, service, price, date, status } = booking;
     return (
         <div className='flex items-center justify-center flex-wrap md:justify-between gap-10'>
             <div className="flex items-center flex-wrap justify-center gap-6">
@@ -18,7 +17,7 @@ const BookingCard = ({ booking, handleDelete }) => {
             </div>
             <div>
                 {
-                    buttonState ? <button className="px-4 py-1 rounded-[10px] border border-green-500 text-center text-green-500 text-xl font-semibold font-['Inter'] leading-[30px]">Approved</button> : <button onClick={() => setButtonState(true)} className="bg-[#FF3811] py-2 px-3 rounded-[10px] text-center text-white text-lg font-semibold font-['Inter'] leading-[30px]">Pending</button>
+                    status === 'confirm' ? <button className="px-4 py-1 rounded-[10px] border border-green-500 text-center text-green-500 text-xl font-semibold font-['Inter'] leading-[30px]">Approved</button> : <button onClick={() => handleBookingConfirm(_id)} className="bg-[#FF3811] py-2 px-3 rounded-[10px] text-center text-white text-lg font-semibold font-['Inter'] leading-[30px]">Confirm</button>
                 }
             </div>
         </div>
