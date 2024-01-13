@@ -4,6 +4,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Register = () => {
 
@@ -51,11 +52,7 @@ const Register = () => {
                         <button type="submit" className="text-center py-3 mt-2 bg-[#FF3811] btn rounded-[10px] text-white text-xl font-medium font-['Inter'] leading-none border-none">Sign Up</button>
                     </div>
                     <div className='pt-8 flex flex-col gap-5'>
-                        <p className="text-center my-3 text-neutral-700 text-lg font-medium font-['Inter']">Or Sign Up with</p>
-                        <div className='flex justify-center gap-7'>
-                            <button className="w-[55px] h-[55px] group/item btn border-none flex justify-center items-center bg-neutral-100 rounded-full" type="button"><FaFacebookF className='text-[#3B5998] h-full group-hover/item:text-white' /></button>
-                            <button className="w-[55px] h-[55px] group/item btn border-none flex justify-center items-center bg-neutral-100 rounded-full" type="button"><FcGoogle className='text-[#EB4132] w-full h-full group-hover/item:text-white' /></button>
-                        </div>
+                       <SocialLogin page='Sign Up'></SocialLogin>
                         <p className="text-center mt-5 text-neutral-500 text-lg font-normal font-['Inter']">Already have an account? <Link className="text-orange-600 text-lg font-semibold font-['Inter']" to="/user/login">Sign In</Link></p>
                     </div>
                 </form>
